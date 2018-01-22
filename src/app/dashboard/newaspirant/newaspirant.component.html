@@ -1,0 +1,120 @@
+  <div>
+  <form novalidate (ngSubmit)="save(signupForm)" #signupForm="ngForm">
+    <div class="form-group" [ngClass]="{'has-error': (firstNameVar.touched || firstNameVar.valid)}">
+      <label class="col-md-8">
+        <!-- <input class="form-control" id="aspId" type="text" placeholder="Your name (required)" required minlength="1" [(ngModel)]="aspirant.aspIdVar"
+          name="IdName" #aspIdVar="ngModel" />
+        <span class="help-block" *ngIf="(aspIdVar.touched || aspIdVar.dirty) && (!aspIdVar.valid)">
+          <span *ngIf="aspIdVar.errors.required">
+            Please fill in the id
+          </span>
+          <span *ngIf="aspIdVar.errors.minlength">
+            Id more than 1 charecter
+          </span>
+        </span>
+        <br> -->
+        <input class="form-control" id="firstNameId" type="text" placeholder="Your name (required)" required minlength="3" [(ngModel)]="aspirant.firstNameVar"
+          name="firstName" #firstNameVar="ngModel" />
+        <span class="help-block" *ngIf="(firstNameVar.touched || firstNameVar.dirty) && (!firstNameVar.valid)">
+          <span *ngIf="firstNameVar.errors.required">
+            Please fill in the name
+          </span>
+          <span *ngIf="firstNameVar.errors.minlength">
+            Name more than 3 charecters
+          </span>
+        </span>
+        <br>
+        <input class="form-control" id="branchId" type="text" placeholder="Your branch (required)" required minlength="2" [(ngModel)]="aspirant.branchNameVar"
+        name="branchName" #branchNameVar="ngModel" />
+      <span class="help-block" *ngIf="(branchNameVar.touched || branchNameVar.dirty) && (!branchNameVar.valid)">
+        <span *ngIf="branchNameVar.errors.required">
+          Please fill in the branch
+        </span>
+        <span *ngIf="branchNameVar.errors.minlength">
+          Branch more than 2 charecters
+        </span>
+      </span>
+      <br>
+      <input class="form-control" id="prefLangId" type="text" placeholder="Your preferred Language (required)" required minlength="1" [(ngModel)]="aspirant.prefLangVar"
+      name="prefLangName" #prefLangVar="ngModel" />
+    <span class="help-block" *ngIf="(prefLangVar.touched || prefLangVar.dirty) && (!prefLangVar.valid)">
+      <span *ngIf="prefLangVar.errors.required">
+        Please fill in the preferred language, only numeric
+      </span>
+      <span *ngIf="prefLangVar.errors.minlength">
+          preferred language more than 1
+      </span>
+    </span>
+    <br>
+      <input class="form-control" id="collegeNameId" type="text" placeholder="Your college (required)" required minlength="3" [(ngModel)]="aspirant.collegeNameVar"
+          name="collegeName" #collegeNameVar="ngModel" />
+        <span class="help-block" *ngIf="(collegeNameVar.touched || collegeNameVar.dirty) && (!collegeNameVar.valid)">
+          <span *ngIf="collegeNameVar.errors.required">
+            Please fill in the college
+          </span>
+          <span *ngIf="collegeNameVar.errors.minlength">
+            College more than 3 charecters
+          </span>
+        </span>
+        <br>
+        <input class="form-control" id="percentId" type="text" placeholder="Your percentage (required)" required minlength="1" [(ngModel)]="aspirant.percentVar"
+          name="percentName" #percentVar="ngModel" />
+        <span class="help-block" *ngIf="(percentVar.touched || percentVar.dirty) && (!percentVar.valid)">
+          <span *ngIf="percentVar.errors.required">
+            Please fill in the percentage, only numeric
+          </span>
+          <span *ngIf="percentVar.errors.minlength">
+            Percentage more than 1
+          </span>
+        </span>
+        <!-- <br>
+        <input class="form-control" id="emailId" type="email" placeholder="Your email (required)" required pattern="[^ @]*@[^ @]" [(ngModel)]="aspirant.emailVar"
+        name="emailName" #emailVar="ngModel" />
+      <span class="help-block" *ngIf="(emailVar.touched || emailVar.dirty) && (!emailVar.valid)">
+        <span *ngIf="emailVar.errors.required">
+          Please fill in the email
+        </span>
+        <span *ngIf="!emailVar.pattern">
+          Please fill in correct the email
+        </span>
+      </span> -->
+        <br><button type="submit" class="btn btn-primary" [disabled]="!signupForm.form.valid">Submit</button>
+      </label>
+    </div>
+  </form>
+</div>
+<div class="container" style="position:relative; top:75px;">
+  <div class="col-md-10">
+		<div class="panel panel-primary">
+      <div class="panel-heading">                
+        <h2 class="panel-title">Aspirants</h2>  
+      </div>
+      <table *ngIf='aspirants' class="table table-hover">    
+        <thead class="thead-dark">
+          <tr>
+            <!-- <th>S.No.</th> -->
+            <th>Name</th>
+            <th>Branch</th>
+            <th>College</th>
+            <th>Perentage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let student of aspirants | filter : searchText">
+            <td *ngIf='!student.name'>Team</td>
+            <!-- <td><a [routerLink]="['/details' , student.id]" (click)="getId(student.id)"> {{student.id}} </a></td> -->
+            <td *ngIf='student.name'><input type="button" value="{{student.name}}" class="btn form-control" [routerLink]="['/details',student.name]"/></td>
+            <td *ngIf='student.branch'><input type="button" value="{{student.branch}}" class="btn form-control"/></td>
+            <td *ngIf='student.college'><input type="button" value="{{student.college}}" class="btn form-control"/></td>
+            <td *ngIf='student.percentage'><input type="button" class="btn form-control" value="{{student.percentage}}"/></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!-- <div>Touched: {{signupForm.touched}}</div>
+<div>Dirty: {{signupForm.dirty}}</div>
+<div>Valid: {{signupForm.valid}}</div>
+<div>Value: {{signupForm.value | json}}</div> -->
